@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <link href="/css/add.css" rel="stylesheet"></link>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 3px 5px 3px 5px;
+            border: 1px solid #aaa;
+        }
+
+        th {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="common/layout :: header"></div>
+    <h1 th:text="${title}"></h1>
+    <form th:action="@{/attendancecontact/add}" th:object="${attendanceContactAddRequest}" th:method="post">
+        <table>
+            <tr>
+                <th class="cell_title">対象日</th>
+                <th class="cell_required">※</th>
+                <td><input type="date" th:field="*{targetDate}" required></td>
+            </tr>
+            <tr>
+                <th class="cell_title">勤怠種別</th>
+                <th class="cell_required">※</th>
+                <td>
+                    <select name="attendanceType" required>       
+                        <option value="">選択してください</option>
+                        <option value="有給休暇">有給休暇</option>
+                        <option value="午前半休">午前半休</option>
+                        <option value="午後半休">午後半休</option>
+                        <option value="遅刻">遅刻</option>
+                        <option value="早退">早退</option>
+                        <option value="欠勤">欠勤</option>
+                        <option value="特別休暇">特別休暇</option>
+                        <option value="慶弔休暇">慶弔休暇</option>
+                        <option value="振替出社">振替出社</option>
+                        <option value="シフト勤務">シフト勤務</option>
+                        <option value="振替休日">振替休日</option>       
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="cell_title">理由種別</th>
+                <th class="cell_required">※</th>
+                <td>
+                    <select name="attendanceReasonType" required>       
+                        <option value="">選択してください</option>
+                        <option value="私用">私用</option>
+                        <option value="体調不良">体調不良</option>
+                        <option value="電車遅延">電車遅延</option>
+                        <option value="その他">その他</option>     
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="cell_title">備考</th>
+                <th class="cell_required"></th>
+                <td><input type="text" th:field="*{note}"></td>
+            </tr>
+        </table>
+        <div class="btn_area_center">
+            <input type="submit" value="登録" class="btn">
+            <input type="button" onclick="history.back()" value="キャンセル" class="btn">
+        </div>
+    </form>
+    <div th:replace="common/layout :: footer"></div>
+</body>
+</html>

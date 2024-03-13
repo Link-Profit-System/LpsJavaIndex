@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 3px 5px 3px 5px;
+            border: 1px solid #aaa;
+        }
+
+        th {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="common/layout :: header"></div>
+    <h1 th:text="${title}"></h1>
+    <form th:action="@{/userinformation/register}" th:object="${userInformationRequest}" th:method="post">
+        <table>
+            <tr>
+                <th class="cell_title">社員番号</th>
+                <th class="cell_required">※</th>
+                <td><input type="text" th:field="*{employeeNum}" required></td>
+            </tr>
+            <tr>
+                <th class="cell_title">姓</th>
+                <th class="cell_required">※</th>
+                <td><input type="text" th:field="*{familyName}" required></td>
+            </tr>
+            <tr>
+                <th class="cell_title">名</th>
+                <th class="cell_required">※</th>
+                <td><input type="text" th:field="*{firstName}" required></td>
+            </tr>
+            <tr>
+                <th class="cell_title">姓(カナ)</th>
+                <th class="cell_required">※</th>
+                <td><input type="text" th:field="*{familyNameKana}" required></td>
+            </tr>
+            <tr>
+                <th class="cell_title">名(カナ)</th>
+                <th class="cell_required">※</th>
+                <td><input type="text" th:field="*{firstNameKana}" required></td>
+            </tr>
+            <tr>
+                <th class="cell_title">生年月日</th>
+                <th class="cell_required">※</th>
+                <td><input type="date" th:field="*{birthday}" required></td>
+            </tr>
+            <tr>
+                <th class="cell_title">電話番号</th>
+                <th class="cell_required">※</th>
+                <td><input type="text" th:field="*{phoneNumber}" required></td>
+            </tr>
+            <tr>
+                <th class="cell_title">メールアドレス</th>
+                <th class="cell_required">※</th>
+                <td><input type="text" th:field="*{mailAddress}" required></td>
+            </tr>
+            <tr>
+                <th class="cell_title">郵便番号</th>
+                <th class="cell_required">※</th>
+                <td><input type="text" th:field="*{postCode}" required></td>
+            </tr>
+            <tr>
+                <th class="cell_title">住所（都道府県）</th>
+                <th class="cell_required">※</th>
+                <td><input type="text" th:field="*{addressRegion}" required></td>
+            </tr>
+            <tr>
+                <th class="cell_title">住所（市町村）</th>
+                <th class="cell_required">※</th>
+                <td><input type="text" th:field="*{addressCity}" required></td>
+            </tr>
+            <tr>
+                <th class="cell_title">住所（町域以下住所）</th>
+                <th class="cell_required">※</th>
+                <td><input type="text" th:field="*{addressStreet}" required></td>
+            </tr>
+            <tr>
+                <th class="cell_title">緊急連絡先（姓名）</th>
+                <th class="cell_required">※</th>
+                <td><input type="text" th:field="*{emergencyContactName}" required></td>
+            </tr>
+            <tr>
+                <th class="cell_title">緊急連絡先（姓名カナ）</th>
+                <th class="cell_required">※</th>
+                <td><input type="text" th:field="*{emergencyContactNameKana}" required></td>
+            </tr>
+            <tr>
+                <th class="cell_title">緊急連絡先（電話番号）</th>
+                <th class="cell_required">※</th>
+                <td><input type="text" th:field="*{emergencyContactPhoneNumber}" required></td>
+            </tr>
+            <tr>
+                <th class="cell_title">緊急連絡先（続柄）</th>
+                <th class="cell_required">※</th>
+                <td>
+                    <select name="emergencyContactRelationship" required>       
+                        <option value="" selected hidden>選択してください</option>
+                        <option value="親族">親族</option>
+                        <option value="知人">知人</option>     
+                        <option value="他">他</option>     
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <div class="btn_area_center">
+            <input type="submit" value="登録" class="btn">
+        </div>
+    </form>
+    <form name="form3" th:action="@{/menu}" method="get">
+        <input type="submit" value="戻る" class="btn">
+    </form>
+    <div th:replace="common/layout :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <link href="/css/list.css" rel="stylesheet"></link>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 3px 5px 3px 5px;
+            border: 1px solid #aaa;
+        }
+
+        th {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="common/layout :: header"></div>
+    <h1 th:text="${title}"></h1>
+    <form name="form3" th:action="@{/menu}" th:method="get">
+        <input type="submit" value="戻る" class="btn">
+    </form>
+    <div>
+        <a th:href="@{/attendancecontact/add}">新規登録はこちら</a>
+    </div>
+    <div>
+        <form th:action="@{/attendancecontact/list/get}" th:object="${attendanceContactSearchRequest}" th:method="get">
+            <label>期間：</label>
+            <input type="date" name="targetDateFrom" th:value="${dateFrom}" required>
+            <label>～</label>
+            <input type="date" name="targetDateTo" th:value="${dateTo}" required>
+            <input class="btn btn-default btn-xs" type="submit" value="検索">
+        </form>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>対象日</th>
+            <th>勤怠種別</th>
+            <th>理由種別</th>
+            <th>備考</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="attendanceContact: ${attendanceContacts}">
+                <td th:text="${attendanceContact['target_date']}"></td>
+                <td th:text="${attendanceContact['attendance_type']}"></td>
+                <td th:text="${attendanceContact['attendance_reason_type']}"></td>
+                <td th:text="${attendanceContact['note']}"></td>
+                <td>
+                <form th:action="@{/attendancecontact/list/{id}(id=${attendanceContact['id']})}" th:method="put">
+                    <input class="btn btn-default btn-xs" type="submit" value="削除">
+                </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div th:replace="common/layout :: footer"></div>
+</body>
+</html>
